@@ -26,5 +26,6 @@ namespace projekt_net.Models
 
         [Display(Name = "Anställd")]
         public int User_Id { get; set; }
+
     }
 }

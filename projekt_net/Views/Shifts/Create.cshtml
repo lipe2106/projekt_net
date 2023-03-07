@@ -1,20 +1,55 @@
 ﻿@model projekt_net.Models.Shift
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
-@{
-    ViewData["Title"] = "Create";
-}
+@if (User.Identity?.Name == "admin@mail.com")
+{
 
-<h1>Create</h1>
+ViewData["Title"] = "Lägg till ledigt arbetspass";
 
-<h4>Shift</h4>
+<h1>@ViewData["Title"]</h1>
 <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="From" class="control-label"></label>
+                    <input asp-for="From" class="form-control" />
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="To" class="control-label"></label>
+                    <input asp-for="To" class="form-control" />
+                    <span asp-validation-for="To" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Lägg till" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else if (SignInManager.IsSignedIn(User))
+{
+    ViewData["Title"] = "Byta/ sjuka dig från arbetspass";
+
+    <h1>@ViewData["Title"]</h1>
+    <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
+                <input asp-for="Type" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,15 +82,17 @@
                 <input asp-for="User_Id" class="form-control" />
                 <span asp-validation-for="User_Id" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Lägg till" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+}
+<br />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Se alla lediga pass</a>
 </div>
 
 @section Scripts {
