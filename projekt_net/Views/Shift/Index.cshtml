@@ -1,0 +1,101 @@
+﻿@model IEnumerable<projekt_net.Models.Shift>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (User.Identity?.Name == "admin@mail.com")
+{
+    ViewData["Title"] = "Lediga pass";
+
+    <h1>@ViewData["Title"]</h1>
+
+    <p>
+    <a asp-action="Create">Lägg till nytt arbetspass</a>
+    </p>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            if(item.EmployeeId == 1)
+
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+            </td>
+        </tr>
+            }
+    }
+    </tbody>
+    </table>
+} else if (SignInManager.IsSignedIn(User))
+{
+    ViewData["Title"] = "Dina bokade arbetspass";
+
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th>Anmäl</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if(@item.Employee.Email == User.Identity?.Name)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td>
+                            <button>Ledigt</button>
+                            <button>Sjuk</button>
+                            <button>Byte</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

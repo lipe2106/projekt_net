@@ -10,6 +10,9 @@ namespace projekt_net.Data
             : base(options)
         {
         }
-        public DbSet<Shift> Shift { get; set; } = default!;
+
+        // Database tables
+        public DbSet<Shift> Shift { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

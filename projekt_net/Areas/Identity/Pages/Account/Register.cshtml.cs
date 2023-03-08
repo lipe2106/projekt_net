@@ -108,7 +108,7 @@ namespace projekt_net.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Employee/Create");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -157,7 +157,7 @@ namespace projekt_net.Areas.Identity.Pages.Account
         private IdentityUser CreateUser()
         {
             try
-            {
+            { 
                 return Activator.CreateInstance<IdentityUser>();
             }
             catch

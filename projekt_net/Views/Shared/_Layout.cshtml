@@ -1,9 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
-<!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,17 +23,27 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (User.Identity?.Name == "admin@mail.com")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Hem</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Lediga pass</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shifts" asp-action="Create">Skapa ledigt skift</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Create">Lägg till arbetspass</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Lista över anställda</a>
+                        </li>
+                        }  else if (SignInManager.IsSignedIn(User))
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Se dina bokade pass</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Create">Boka arbetspass</a>
                         </li>
                         }
                     </ul>
-                    
                     <partial name="_LoginPartial" />
                 </div>
             </div>

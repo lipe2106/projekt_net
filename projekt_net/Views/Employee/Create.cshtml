@@ -1,0 +1,34 @@
+@model projekt_net.Models.Employee
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+    @{
+    Layout = "_AddEmployeeLayout";
+    ViewData["Title"] = "Hej " + User.Identity?.Name!;
+    }
+
+    <h4>@ViewData["Title"]</h4>
+    <h5>Vad heter du?</h5>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" value="@User.Identity?.Name" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Logga in" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>

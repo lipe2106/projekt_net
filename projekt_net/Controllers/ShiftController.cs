@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,26 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using projekt_net.Data;
 using projekt_net.Models;
 
-namespace projekt_net.Controllers
+namespace projekt_net
 {
-    public class ShiftsController : Controller
+    public class ShiftController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ShiftsController(ApplicationDbContext context)
+        public ShiftController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Shifts
+        // GET: Shift
         public async Task<IActionResult> Index()
         {
-              return _context.Shift != null ? 
-                          View(await _context.Shift.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Shift'  is null.");
+            var applicationDbContext = _context.Shift.Include(s => s.Employee);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Shifts/Details/5
+        // GET: Shift/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -36,6 +35,7 @@ namespace projekt_net.Controllers
             }
 
             var shift = await _context.Shift
+                .Include(s => s.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (shift == null)
             {
@@ -45,18 +45,19 @@ namespace projekt_net.Controllers
             return View(shift);
         }
 
-        // GET: Shifts/Create
+        // GET: Shift/Create
         public IActionResult Create()
         {
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Name");
             return View();
         }
 
-        // POST: Shifts/Create
+        // POST: Shift/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,From,To,Available,Sick,Change,User_Id")] Shift shift)
+        public async Task<IActionResult> Create([Bind("Id,Type,From,To,Available,Sick,Change,EmployeeId")] Shift shift)
         {
             if (ModelState.IsValid)
             {
@@ -64,10 +65,11 @@ namespace projekt_net.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", shift.EmployeeId);
             return View(shift);
         }
 
-        // GET: Shifts/Edit/5
+        // GET: Shift/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -80,15 +82,16 @@ namespace projekt_net.Controllers
             {
                 return NotFound();
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", shift.EmployeeId);
             return View(shift);
         }
 
-        // POST: Shifts/Edit/5
+        // POST: Shift/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,From,To,Available,Sick,Change,User_Id")] Shift shift)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,From,To,Available,Sick,Change,EmployeeId")] Shift shift)
         {
             if (id != shift.Id)
             {
@@ -115,10 +118,11 @@ namespace projekt_net.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", shift.EmployeeId);
             return View(shift);
         }
 
-        // GET: Shifts/Delete/5
+        // GET: Shift/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -127,6 +131,7 @@ namespace projekt_net.Controllers
             }
 
             var shift = await _context.Shift
+                .Include(s => s.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (shift == null)
             {
@@ -136,7 +141,7 @@ namespace projekt_net.Controllers
             return View(shift);
         }
 
-        // POST: Shifts/Delete/5
+        // POST: Shift/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
