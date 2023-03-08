@@ -26,7 +26,7 @@
                         @if (User.Identity?.Name == "admin@mail.com")
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Lediga pass</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Vy arbetspass</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Create">Lägg till arbetspass</a>
@@ -37,10 +37,7 @@
                         }  else if (SignInManager.IsSignedIn(User))
                         {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Se dina bokade pass</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Create">Boka arbetspass</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Vy över arbetspass</a>
                         </li>
                         }
                     </ul>

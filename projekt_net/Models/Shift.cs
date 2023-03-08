@@ -29,7 +29,7 @@ namespace projekt_net.Models
         public bool Change { get; set; }
 
         // Relationship with employee
-        [Display(Name = "Anställd")]
+        [Display(Name = "Arbetar passet")]
         public int EmployeeId{ get; set; }
         public Employee? Employee { get; set; }
     }

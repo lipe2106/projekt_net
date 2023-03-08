@@ -82,7 +82,11 @@ namespace projekt_net
             {
                 return NotFound();
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", shift.EmployeeId);
+
+            var employee = await _context.Employees.FindAsync(shift.EmployeeId);
+            ViewData["EmployeeName"] = employee.Name;
+
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
             return View(shift);
         }
 
@@ -118,7 +122,10 @@ namespace projekt_net
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", shift.EmployeeId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
+
+            var employee = await _context.Employees.FindAsync(shift.EmployeeId);
+            ViewData["EmployeeName"] = employee.Name;
             return View(shift);
         }
 

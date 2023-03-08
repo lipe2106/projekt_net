@@ -1,62 +1,153 @@
 ﻿@model IEnumerable<projekt_net.Models.Shift>
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser>  UserManager
 
 @if (User.Identity?.Name == "admin@mail.com")
 {
-    ViewData["Title"] = "Lediga pass";
+    ViewData["Title"] = "Vy över arbetspass";
 
     <h1>@ViewData["Title"]</h1>
+    <hr />
+    <h2>Lediga pass</h2>
 
-    <p>
-    <a asp-action="Create">Lägg till nytt arbetspass</a>
-    </p>
     <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.From)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.To)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+        {
             if(item.EmployeeId == 1)
-
             {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.From)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.To)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                </td>
+            </tr>
             }
-    }
-    </tbody>
+        }
+        </tbody>
+    </table>
+    <br />
+    <h2>Bokade pass</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if(item.EmployeeId != 1)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
     </table>
 } else if (SignInManager.IsSignedIn(User))
 {
-    ViewData["Title"] = "Dina bokade arbetspass";
+     ViewData["Title"] = "Vy över arbetspass";
 
     <h1>@ViewData["Title"]</h1>
+    <hr />
+    <h2>Lediga pass</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            if(item.EmployeeId == 1)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Boka arbetspass</a> 
+                </td>
+            </tr>
+            }
+        }
+        </tbody>
+    </table>
+    <br />
+
+    <h2>Dina bokade pass</h2>
     <hr />
     <table class="table">
         <thead>
@@ -78,22 +169,22 @@
             {
                 if(@item.Employee.Email == User.Identity?.Name)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            <button>Ledigt</button>
-                            <button>Sjuk</button>
-                            <button>Byte</button>
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    <button>Ledigt</button>
+                    <button>Sjuk</button>
+                    <button>Byte</button>
+                </td>
+            </tr>
                 }
             }
         </tbody>

@@ -1,44 +1,92 @@
 ﻿@model projekt_net.Models.Shift
 
-@{
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (User.Identity?.Name == "admin@mail.com")
+{
     ViewData["Title"] = "Redigera arbetspass";
-}
 
-<h1>@ViewData["Title"]</h1>
+    <h1>@ViewData["Title"]</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="From" class="control-label"></label>
-                <input asp-for="From" class="form-control" />
-                <span asp-validation-for="From" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="To" class="control-label"></label>
-                <input asp-for="To" class="form-control" />
-                <span asp-validation-for="To" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Spara ändringar" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="From" class="control-label"></label>
+                    <input asp-for="From" class="form-control" />
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="To" class="control-label"></label>
+                    <input asp-for="To" class="form-control" />
+                    <span asp-validation-for="To" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Spara ändringar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<br />
-<div>
-    <a asp-action="Index">Se alla lediga pass</a>
-</div>
+} else if (SignInManager.IsSignedIn(User))
+{
+    ViewData["Title"] = "Boka arbetspass";
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <h1>@ViewData["Title"]</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="From" class="control-label"></label>
+                    <input asp-for="From" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="From" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="To" class="control-label"></label>
+                    <input asp-for="To" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="To" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label">Ditt användarnamn</label>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Boka pass" class="btn btn-primary" />
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
 }
+    <br />
+    <div>
+        <a asp-action="Index">Tillbaka till vyn</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
