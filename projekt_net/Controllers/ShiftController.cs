@@ -83,10 +83,8 @@ namespace projekt_net
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(shift.EmployeeId);
-            ViewData["EmployeeName"] = employee.Name;
-
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
+            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
+            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId);
             return View(shift);
         }
 
@@ -122,10 +120,9 @@ namespace projekt_net
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
+            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
+            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId);
 
-            var employee = await _context.Employees.FindAsync(shift.EmployeeId);
-            ViewData["EmployeeName"] = employee.Name;
             return View(shift);
         }
 

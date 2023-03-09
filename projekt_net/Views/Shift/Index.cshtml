@@ -68,7 +68,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.EmployeeId)
                 </th>
-                <th></th>
+                <th>
+                    Ansökt om frånvaro
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -90,9 +92,7 @@
                     @Html.DisplayFor(modelItem => item.Employee.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                    @if(@item.Available) { @Html.DisplayFor(modelItem => item.Available) }
                 </td>
             </tr>
                 }
@@ -162,6 +162,9 @@
                     @Html.DisplayNameFor(model => model.To)
                 </th>
                 <th>Anmäl</th>
+                <th>
+                    Ansökt om frånvaro
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -180,9 +183,10 @@
                     @Html.DisplayFor(modelItem => item.To)
                 </td>
                 <td>
-                    <button>Ledigt</button>
-                    <button>Sjuk</button>
-                    <button>Byte</button>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Ledigt | Sjuk | Byte</a>
+                </td>
+                <td>
+                    @if(@item.Available) { @Html.DisplayFor(modelItem => item.Available) }
                 </td>
             </tr>
                 }

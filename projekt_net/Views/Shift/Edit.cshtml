@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="EmployeeId" class="control-label"></label>
-                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeName"></select>
                 </div>
                 <br />
                 <div class="form-group">
@@ -44,7 +44,7 @@
     </div>
 } else if (SignInManager.IsSignedIn(User))
 {
-    ViewData["Title"] = "Boka arbetspass";
+    ViewData["Title"] = "Hantera arbetspass";
 
     <h1>@ViewData["Title"]</h1>
 
@@ -70,8 +70,17 @@
                     <span asp-validation-for="To" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">Vad vill du göra?</label>
+                    <select class="form-control">
+                        <option asp-for="Available" value="false">Boka pass</option>
+                        <option asp-for="Available" value="true">Ansök om ledigt</option>
+                        <option asp-for="Sick" value="true">Anmäl dig sjuk</option>
+                        <option asp-for="Change" value="true">Byta pass</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label asp-for="EmployeeId" class="control-label">Ditt användarnamn</label>
-                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+                    <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeEmail"></select>
                 </div>
                 <br />
                 <div class="form-group">

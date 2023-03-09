@@ -18,15 +18,14 @@ namespace projekt_net.Models
         [Display(Name = "Till")]
         public DateTime To { get; set; }
 
-        [Required(ErrorMessage = "Du måste ange om passet är ledigt eller inte")]
         [Display(Name = "Ledigt")]
-        public bool Available { get; set; }
-
+        public bool Available { get; set; } = true;
+        
         [Display(Name = "Sjuk")]
-        public bool Sick { get; set; }
+        public bool Sick { get; set; } = true;
 
         [Display(Name = "Byta pass")]
-        public bool Change { get; set; }
+        public bool Change { get; set; } = true;
 
         // Relationship with employee
         [Display(Name = "Arbetar passet")]
