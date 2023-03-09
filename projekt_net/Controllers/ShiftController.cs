@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using projekt_net.Models;
 
 namespace projekt_net
 {
+    [Authorize]
     public class ShiftController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +23,14 @@ namespace projekt_net
 
         // GET: Shift
         public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Shift.Include(s => s.Employee);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: /xhours
+        [Route("/xhours")]
+        public async Task<IActionResult> xhours()
         {
             var applicationDbContext = _context.Shift.Include(s => s.Employee);
             return View(await applicationDbContext.ToListAsync());
@@ -57,7 +67,7 @@ namespace projekt_net
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type,From,To,Available,Sick,Change,EmployeeId")] Shift shift)
+        public async Task<IActionResult> Create([Bind("Id,Type,From,To,Abscence,EmployeeId")] Shift shift)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +103,7 @@ namespace projekt_net
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,From,To,Available,Sick,Change,EmployeeId")] Shift shift)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,From,To,Abscence,EmployeeId")] Shift shift)
         {
             if (id != shift.Id)
             {

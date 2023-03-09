@@ -18,14 +18,8 @@ namespace projekt_net.Models
         [Display(Name = "Till")]
         public DateTime To { get; set; }
 
-        [Display(Name = "Ledigt")]
-        public bool Available { get; set; } = true;
-        
-        [Display(Name = "Sjuk")]
-        public bool Sick { get; set; } = true;
-
-        [Display(Name = "Byta pass")]
-        public bool Change { get; set; } = true;
+        [Display(Name = "Frånvaro")]
+        public int Abscence { get; set; } 
 
         // Relationship with employee
         [Display(Name = "Arbetar passet")]
@@ -47,4 +41,5 @@ namespace projekt_net.Models
         // Relationship with shifts
         public List<Shift>? Shift { get; set; }
     }
+
 }

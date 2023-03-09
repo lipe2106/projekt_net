@@ -71,11 +71,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Vad vill du göra?</label>
-                    <select class="form-control">
-                        <option asp-for="Available" value="false">Boka pass</option>
-                        <option asp-for="Available" value="true">Ansök om ledigt</option>
-                        <option asp-for="Sick" value="true">Anmäl dig sjuk</option>
-                        <option asp-for="Change" value="true">Byta pass</option>
+                    <select asp-for="Abscence" class="form-control">
+                        <option value="0">Boka pass</option>
+                        <option value="1">Ansök om ledigt</option>
+                        <option value="1">Anmäl dig sjuk</option>
+                        <option value="1">Byta pass</option>
                     </select>
                 </div>
                 <div class="form-group">

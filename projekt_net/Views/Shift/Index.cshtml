@@ -78,28 +78,34 @@
             {
                 if(item.EmployeeId != 1)
                 {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.Name)
-                </td>
-                <td>
-                    @if(@item.Available) { @Html.DisplayFor(modelItem => item.Available) }
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee.Name)
+                        </td>
+                        @if(@item.Abscence == 1) 
+                        {
+                            <td>
+                                &#10003; 
+                            </td>
+                        } else 
+                        {
+                            <td></td>
+                        }
+                    </tr>
                 }
             }
         </tbody>
     </table>
-} else if (SignInManager.IsSignedIn(User))
+} else
 {
      ViewData["Title"] = "Vy över arbetspass";
 
@@ -172,23 +178,29 @@
             {
                 if(@item.Employee.Email == User.Identity?.Name)
                 {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Ledigt | Sjuk | Byte</a>
-                </td>
-                <td>
-                    @if(@item.Available) { @Html.DisplayFor(modelItem => item.Available) }
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Ledigt | Sjuk | Byte</a>
+                        </td>
+                        @if(@item.Abscence == 1)
+                                {
+                        <td>
+                            &#10003;
+                        </td>
+                                } else
+                                {
+                        <td></td>
+                                }
+                    </tr>
                 }
             }
         </tbody>
