@@ -1,208 +1,238 @@
 @model IEnumerable<projekt_net.Models.Shift>
-    @using Microsoft.AspNetCore.Identity
-    @inject SignInManager<IdentityUser> SignInManager
-        @inject UserManager<IdentityUser> UserManager
-
-            @if (User.Identity?.Name == "admin@mail.com")
-{
-    ViewData["Title"] = "Vy över arbetspass";
-
-            <h1>@ViewData["Title"]</h1>
-            <hr />
-            <h2>Lediga pass</h2>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Type)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.From)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.To)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-        {
-            if(item.EmployeeId == 1)
-            {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
-                        </td>
-                    </tr>
-            }
-        }
-                </tbody>
-            </table>
-            <br />
-            <h2>Bokade pass</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Type)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.From)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.To)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.EmployeeId)
-                        </th>
-                        <th>
-                            Ansökt om frånvaro
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-            {
-                if(item.EmployeeId != 1)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Employee.Name)
-                        </td>
-                        @if(@item.Abscence == 1)
-                        {
-                        <td>
-                            &#10003;
-                        </td>
-                        } else
-                        {
-                        <td></td>
-                        }
-                    </tr>
-                }
-            }
-                </tbody>
-            </table>
-} else
-{
-     ViewData["Title"] = "Vy över arbetspass";
-
-            <h1>@ViewData["Title"]</h1>
-            <hr />
-            <h2>Lediga pass</h2>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Type)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.From)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.To)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-        {
-            if(item.EmployeeId == 1)
-            {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Boka arbetspass</a>
-                        </td>
-                    </tr>
-            }
-        }
-                </tbody>
-            </table>
-            <br />
-
-            <h2>Dina bokade pass</h2>
-            <hr />
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Type)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.From)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.To)
-                        </th>
-                        <th>Anmäl</th>
-                        <th>
-                            Ansökt om frånvaro
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-            {
-                if(@item.Employee.Email == User.Identity?.Name)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Ledigt | Sjuk | Byte</a>
-                        </td>
-                        @if(@item.Abscence == 1)
-                                {
-                        <td>
-                            &#10003;
-                        </td>
-                                } else
-                                {
-                        <td></td>
-                                }
-                    </tr>
-                }
-            }
-                </tbody>
-            </table>
+@{
+    Layout = "_XhoursLayout";
+    ViewData["Title"] = "X-hours";
 }
+
+<div class="text-center mt-5 xhour-h1">
+    <h1 class="display-4 text-light">Ditt företags administrationssystem för timanställda </h1>
+</div>
+<div class="section-container">
+<section class=" p-1 mt-5">
+</section>
+<div class="border p-4 m-5 shadow xhours">
+    <h1>Vy över arbetspass [Admin]</h1>
+    <hr />
+    <h2>Lediga pass</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+    {
+        if(item.EmployeeId == 1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td class="link">Redigera | Information | Radera</td>
+            </tr>
+        }
+    }
+        </tbody>
+    </table>
+</div>
+<div class="text-light info-right bg-dark">
+    <h2>Adminpanel med vy över lediga samt bokade pass</h2>
+    <p>Här kommer lite information om att man som admin kan se vilka pass som är lediga samt redigera dem, se mer information och radera dem.</p>
+</div>
+</div>
+<div class="section-container">
+    <section class=" p-1 mt-5">
+    </section>
+    <div class="border p-4 mb-5 shadow xhours right">
+        <h2>Bokade pass [Admin]</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.From)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.To)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeId)
+                    </th>
+                    <th>
+                        Ansökt om frånvaro
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+    {
+        if(item.EmployeeId != 1)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Name)
+                    </td>
+                    @if(@item.Abscence == 1)
+                {
+                    <td>
+                        &#10003;
+                    </td>
+                } else
+                {
+                    <td></td>
+                }
+                </tr>
+        }
+    }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-light info-left bg-dark">
+        <h2>Adminpanel med vy över lediga samt bokade pass</h2>
+        <p>Här kommer lite information om att man som admin kan se vilka pass som är lediga samt redigera dem, se mer information och radera dem.</p>
+    </div>
+</div>
+<div class="bg-dark info-section">
+    <p class="text-light text-center">Information om någonting</p>
+</div>
+<div class="section-container">
+    <section class=" p-1 mt-5">
+    </section>
+    <div class="border p-4 mb-5 shadow xhours left">
+        <h1>Vy över arbetspass [Anställd]</h1>
+        <hr />
+        <h2>Lediga pass</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.From)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.To)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+    {
+        if(item.EmployeeId == 1)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td class="link">
+                        Boka arbetspass
+                    </td>
+                </tr>
+        }
+    }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-light info-right bg-dark">
+        <h2>Adminpanel med vy över lediga samt bokade pass</h2>
+        <p>Här kommer lite information om att man som admin kan se vilka pass som är lediga samt redigera dem, se mer information och radera dem.</p>
+    </div>
+</div>
+<div class="section-container">
+    <section class=" p-1 mt-5">
+    </section>
+    <div class="border p-4 mb-5 shadow xhours right">
+        <h2>Dina bokade pass [Anställd]</h2>
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.From)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.To)
+                    </th>
+                    <th>Anmäl</th>
+                    <th>
+                        Ansökt om frånvaro
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+    {
+        if(@item.Employee.Email == "lina@mail.com")
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td class="link">
+                        Ledigt | Sjuk | Byte
+                    </td>
+                    @if(@item.Abscence == 1)
+                {
+                    <td>
+                        &#10003;
+                    </td>
+                } else
+                {
+                    <td></td>
+                }
+                </tr>
+        }
+    }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-light info-left bg-dark">
+        <h2>Adminpanel med vy över lediga samt bokade pass</h2>
+        <p>Här kommer lite information om att man som admin kan se vilka pass som är lediga samt redigera dem, se mer information och radera dem.</p>
+    </div>
+</div>

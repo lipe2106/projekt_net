@@ -11,7 +11,6 @@ using projekt_net.Models;
 
 namespace projekt_net
 {
-    [Authorize]
     public class ShiftController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +21,7 @@ namespace projekt_net
         }
 
         // GET: Shift
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Shift.Include(s => s.Employee);
@@ -37,6 +37,7 @@ namespace projekt_net
         }
 
         // GET: Shift/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -56,6 +57,7 @@ namespace projekt_net
         }
 
         // GET: Shift/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Name");
@@ -67,6 +69,7 @@ namespace projekt_net
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Type,From,To,Abscence,EmployeeId")] Shift shift)
         {
             if (ModelState.IsValid)
@@ -80,6 +83,7 @@ namespace projekt_net
         }
 
         // GET: Shift/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -103,6 +107,7 @@ namespace projekt_net
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Type,From,To,Abscence,EmployeeId")] Shift shift)
         {
             if (id != shift.Id)
@@ -137,6 +142,7 @@ namespace projekt_net
         }
 
         // GET: Shift/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Shift == null)
@@ -158,6 +164,7 @@ namespace projekt_net
         // POST: Shift/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Shift == null)
