@@ -33,7 +33,9 @@ namespace projekt_net
         public async Task<IActionResult> xhours()
         {
             var applicationDbContext = _context.Shift.Include(s => s.Employee);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Name");
             return View(await applicationDbContext.ToListAsync());
+
         }
 
         // GET: Shift/Details/5

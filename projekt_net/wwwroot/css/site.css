@@ -17,10 +17,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 .link {
     text-decoration: underline;
     color: darkcyan;
@@ -59,18 +55,24 @@ section {
 
 .info-right {
     position: absolute;
-    top: 15%;
+    top: 10%;
     right: 5%;
     width: 40%;
-    padding: 3%;
+    padding: 2% 3%;
+    font-weight: lighter;
 }
 
 .info-left {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 5%;
     width: 40%;
-    padding: 3%;
+    padding: 2% 3%;
+    font-weight: lighter;
+}
+
+.info-left h2, .info-right h2 {
+    font-weight: lighter;
 }
 
 
@@ -101,5 +103,57 @@ section {
 }
 
 .info-section {
-    height: 370px;
+    height: 470px;
+    padding-top: 2%;
+}
+
+.info-section form {
+    width: 40%;
+    font-size: 0.5em;
+    margin: auto;
+    margin-top: 2%;
+    border: 1px solid gray;
+}
+
+    .info-section p {
+        font-size: 0.8em;
+        margin-left: 30%;
+    }
+
+
+    .info-section h4 {
+        font-size: 1rem;
+    }
+
+
+    .info-section select, .info-section input {
+        font-size: 1em;
+    }
+
+.info-section .btn {
+    font-size: 1em;
+    background-color: darkcyan;
+}
+
+footer h2 {
+    font-size: 1.2em;
+    font-weight: lighter;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.footer-xhours {
+    height: 180px;
+}
+
+.copy {
+    text-align: right;
+    padding-right: 0;
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    font-size: 0.8em;
 }

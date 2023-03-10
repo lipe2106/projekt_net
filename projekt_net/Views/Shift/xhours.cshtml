@@ -5,13 +5,13 @@
 }
 
 <div class="text-center mt-5 xhour-h1">
-    <h1 class="display-4 text-light">Ditt f�retags administrationssystem f�r timanst�llda </h1>
+    <h1 class="display-4 text-light">Ditt företags administrationssystem för timanställda </h1>
 </div>
 <div class="section-container">
 <section class=" p-1 mt-5">
 </section>
 <div class="border p-4 m-5 shadow xhours">
-    <h1>Vy �ver arbetspass [Admin]</h1>
+    <h1>Vy över arbetspass [Admin]</h1>
     <hr />
     <h2>Lediga pass</h2>
     <table class="table">
@@ -52,8 +52,9 @@
     </table>
 </div>
 <div class="text-light info-right bg-dark">
-    <h2>Adminpanel med vy �ver lediga samt bokade pass</h2>
-    <p>H�r kommer lite information om att man som admin kan se vilka pass som �r lediga samt redigera dem, se mer information och radera dem.</p>
+    <h2>Adminpanel med vy över lediga arbetspass</h2>
+    <p>Som admin över ditt företags X-hours får du tillgång till vyn över arbetspassen där du på ett lättöverskådligt sätt kan se vilka arbetspass som är lediga. 
+    Du kan från vyn redigera dessa pass, se detaljerad information om dem samt radera arbetspassen om de av någon anledning inte skulle vara aktuella längre. </p>
 </div>
 </div>
 <div class="section-container">
@@ -77,7 +78,7 @@
                         @Html.DisplayNameFor(model => model.EmployeeId)
                     </th>
                     <th>
-                        Ans�kt om fr�nvaro
+                        Ansökt om frånvaro
                     </th>
                 </tr>
             </thead>
@@ -115,18 +116,47 @@
         </table>
     </div>
     <div class="text-light info-left bg-dark">
-        <h2>Adminpanel med vy �ver lediga samt bokade pass</h2>
-        <p>H�r kommer lite information om att man som admin kan se vilka pass som �r lediga samt redigera dem, se mer information och radera dem.</p>
+        <h2>Adminpanel med vy över bokade arbetspass</h2>
+        <p>Som admin får du även tillgång till vyn över redan bokade arbetspass. Dessa pass kan antingen vara bokade via dig eller via en timanställd som bokat in sig på
+        ett av de tidigare lediga passen. Här kan du se vilken timanställd som är inbokad samt om hen ansökt om frånvaro såsom ledighet, byte av pass eller sjukdom.</p>
     </div>
 </div>
-<div class="bg-dark info-section">
-    <p class="text-light text-center">Information om n�gonting</p>
+<div class="bg-dark info-section text-light">
+    <h2 class="display-5 text-center">Lägg på ett smidigt sätt in arbetspass</h2>
+    <h3 class="fw-lighter text-center">Vare sig de är lediga eller ska tilldelas en timanställd</h3>
+            <form asp-action="Create" class="bg-light p-3 create text-dark">
+                <h4>Lägg till arbetspass</h4>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Typ av pass</label>
+                    <input class="form-control" autocomplete="off" value="Kväll" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Från</label>
+                    <input type="datetime" class="form-control" value="2023-03-20 16.00" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Till</label>
+                    <input type="datetime" class="form-control" value="2023-03-20 22.00"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Arbetar passet</label>
+                    <select class="form-control" asp-items="ViewBag.EmployeeId">
+                    </select>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Lägg till" class="btn btn-primary" disabled="disabled" />
+                </div>
+            </form>
+    <p class="fw-lighter">* Knappen är i detta formulär satt ur funktion</p>
 </div>
 <div class="section-container">
     <section class=" p-1 mt-5">
     </section>
     <div class="border p-4 mb-5 shadow xhours left">
-        <h1>Vy �ver arbetspass [Anst�lld]</h1>
+        <h1>Vy över arbetspass [Anställd]</h1>
         <hr />
         <h2>Lediga pass</h2>
 
@@ -170,15 +200,16 @@
         </table>
     </div>
     <div class="text-light info-right bg-dark">
-        <h2>Adminpanel med vy �ver lediga samt bokade pass</h2>
-        <p>H�r kommer lite information om att man som admin kan se vilka pass som �r lediga samt redigera dem, se mer information och radera dem.</p>
+        <h2>Vy över lediga arbetspass för timanställda</h2>
+        <p>Som timanställd på ett företag som använder X-hours ges tillgång till en vy över de lediga arbetspass som finns tillgängliga hos företaget. Vyn visar vilken typ av pass 
+        som är ledigt samt mellan vilka tider det löper. Via vyn kan den timanställde själv boka in sig på de lediga arbetspass hen vill arbeta.</p>
     </div>
 </div>
 <div class="section-container">
     <section class=" p-1 mt-5">
     </section>
     <div class="border p-4 mb-5 shadow xhours right">
-        <h2>Dina bokade pass [Anst�lld]</h2>
+        <h2>Dina bokade pass [Anställd]</h2>
         <hr />
         <table class="table">
             <thead>
@@ -192,9 +223,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.To)
                     </th>
-                    <th>Anm�l</th>
+                    <th>Anmäl</th>
                     <th>
-                        Ans�kt om fr�nvaro
+                        Ansökt om frånvaro
                     </th>
                 </tr>
             </thead>
@@ -232,7 +263,8 @@
         </table>
     </div>
     <div class="text-light info-left bg-dark">
-        <h2>Adminpanel med vy �ver lediga samt bokade pass</h2>
-        <p>H�r kommer lite information om att man som admin kan se vilka pass som �r lediga samt redigera dem, se mer information och radera dem.</p>
+        <h2>Vy över den timanställdes bokade pass</h2>
+        <p>Företagets timanställda för också tillgång till en lättöverskådlig vy över de arbetspass som redan finns bokade på hen. Dessa kan vara bokade av dig som arbetsgivare eller vara tidigare lediga pass
+        den timantällde själv valt att boka in sig på. Via vyn kan den anställde även ansöka om frånvaro såsom ledighet, byte av pass eller sjukdom.</p>
     </div>
 </div>
