@@ -9,7 +9,8 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem teal;
+  background-color: white;
 }
 
 html {
@@ -17,10 +18,21 @@ html {
   min-height: 100%;
 }
 
+body {
+    padding-bottom: 178px;
+}
+
+
 .link {
     text-decoration: underline;
     color: darkcyan;
 }
+
+.link:hover {
+    color: gray;
+}
+
+
 
 .section-container {
     position: relative;
@@ -33,6 +45,13 @@ section {
     margin-bottom: 10%;
 }
 
+@media (max-width: 950px) {
+
+    section {
+        height: 600px;
+    }
+}
+
 .xhours {
     position: absolute;
     top: 0%;
@@ -43,10 +62,44 @@ section {
     background-color: rgb(241, 241, 241) 
 }
 
+@media (max-width: 950px) {
+
+    .xhours {
+        top: 0%;
+        left: 5%;
+        width: 80%;
+        height: auto;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .xhours {
+        top: 0%;
+        left: 7%;
+        width: 70%;
+        height: auto;
+    }
+}
+
 .right {
     top: -5%;
     right: 5%;
     transform: rotate(15deg);
+}
+
+@media (max-width: 950px) {
+    .right {
+        top: 0%;
+        left: 10%;
+    }
+}
+
+@media (max-width: 500px) {
+    .right {
+        top: 0%;
+        left: 15%;
+    }
 }
 
 .left {
@@ -62,6 +115,22 @@ section {
     font-weight: lighter;
 }
 
+@media (max-width: 950px) {
+    .info-right {
+        top: 50%;
+        right: 5%;
+        width: 60%;
+    }
+}
+
+@media (max-width: 500px) {
+    .info-right {
+        right: 10%;
+        width: 70%;
+        font-size: 0.9em;
+    }
+}
+
 .info-left {
     position: absolute;
     top: 10%;
@@ -71,6 +140,23 @@ section {
     font-weight: lighter;
 }
 
+@media (max-width: 950px) {
+    .info-left {
+        top: 50%;
+        right: 5%;
+        width: 60%;
+    }
+}
+
+@media (max-width: 500px) {
+    .info-left {
+        top: 50%;
+        left: 10%;
+        font-size: 0.9em;
+        width: 70%;
+    }
+}
+
 .info-left h2, .info-right h2 {
     font-weight: lighter;
 }
@@ -78,6 +164,8 @@ section {
 
 .x-hour-container {
     padding-top: 5%;
+    max-width: 1450px;
+    margin: auto;
 }
 
 
@@ -90,70 +178,147 @@ section {
     padding: 6% 2%;
 }
 
-.hero {
-    width: 113.5%; 
-    margin: -7%;
+@media (max-width: 950px) {
+
+    .xhour-h1 {
+        width: 80%;
+        padding-left: 20%;
+    }
 }
 
-.background {
-    background-image: url("../hero.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+@media (max-width: 500px) {
+
+    .xhour-h1 {
+        width: 100%;
+        padding-left: 0%;
+    }
 }
 
-.info-section {
-    height: 470px;
-    padding-top: 2%;
-}
+    .hero {
+        width: 113.5%;
+        margin: -7%;
+    }
 
-.info-section form {
-    width: 40%;
-    font-size: 0.5em;
-    margin: auto;
-    margin-top: 2%;
-    border: 1px solid gray;
-}
+    .background {
+        background-image: url("../hero.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 
-    .info-section p {
+    .info-section {
+        max-height: 480px;
+        padding-bottom: 3%;
+        padding-top: 2%;
+    }
+
+        .info-section form {
+            width: 40%;
+            font-size: 0.5em;
+            margin: auto;
+            margin-top: 2%;
+            border: 1px solid gray;
+        }
+
+        @media (max-width: 500px) {
+            .info-section form {
+                width: 80%;
+            } 
+        }
+
+        .info-section p {
+            font-size: 0.8em;
+            margin-left: 30%;
+        }
+
+
+        .info-section h4 {
+            font-size: 1rem;
+        }
+
+
+        .info-section select, .info-section input {
+            font-size: 1em;
+        }
+
+        .info-section .btn {
+            font-size: 1em;
+            background-color: teal;
+        }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 180px;
+    }
+
+        footer h2 {
+            font-size: 1.2em;
+            font-weight: lighter;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8em;
+        }
+
+    .copy {
+        text-align: right;
+        padding-right: 0;
+        position: absolute;
+        bottom: 12px;
+        right: 20px;
         font-size: 0.8em;
-        margin-left: 30%;
     }
 
 
-    .info-section h4 {
-        font-size: 1rem;
+
+    .nav-link:hover {
+        color: rgb(81, 190, 172) !important;
     }
 
-
-    .info-section select, .info-section input {
-        font-size: 1em;
+    .nav-link-identity {
+        background-color: white !important;
+        color: teal;
     }
 
-.info-section .btn {
-    font-size: 1em;
-    background-color: darkcyan;
-}
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: teal;
+        background-color: teal;
+        border-color: teal;
+    }
 
-footer h2 {
-    font-size: 1.2em;
-    font-weight: lighter;
-}
+    .btn-primary {
+        background-color: teal;
+        border: none;
+    }
 
-footer p {
-    margin: 0;
-    font-size: 0.8em;
-}
+        .btn-primary:hover {
+            background-color: rgb(1, 67, 67) !important;
+        }
 
-.footer-xhours {
-    height: 180px;
-}
+    .user {
+        color: rgb(81, 190, 172) !important;
+    }
 
-.copy {
-    text-align: right;
-    padding-right: 0;
-    position: absolute;
-    bottom: 12px;
-    right: 20px;
-    font-size: 0.8em;
-}
+        .user:hover {
+            color: rgb(149, 182, 182) !important;
+        }
+
+    a {
+        color: teal;
+    }
+
+        a:hover {
+            color: rgb(1, 67, 67);
+        }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .table-scroll {
+        min-width: 700px;
+    }

@@ -26,21 +26,21 @@
                                     @if (User.Identity?.Name == "admin@mail.com")
                         {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Vy arbetspass</a>
+                                        <a class="nav-link text-light fw-lighter" asp-area="" asp-controller="Shift" asp-action="Index">Vy arbetspass</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Create">Lägg till arbetspass</a>
+                                        <a class="nav-link text-light fw-lighter" asp-area="" asp-controller="Shift" asp-action="Create">LÃ¤gg till arbetspass</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Lista över anställda</a>
+                                        <a class="nav-link text-light fw-lighter" asp-area="" asp-controller="Employee" asp-action="Index">Lista Ã¶ver anstÃ¤llda</a>
                                     </li>
                         }  else if (SignInManager.IsSignedIn(User))
                         {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Shift" asp-action="Index">Vy över arbetspass</a>
+                                        <a class="nav-link text-light fw-lighter" asp-area="" asp-controller="Shift" asp-action="Index">Vy Ã¶ver arbetspass</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Din profil</a>
+                                        <a class="nav-link text-light fw-lighter" asp-area="" asp-controller="Employee" asp-action="Index">Din profil</a>
                                     </li>
                         }
                                 </ul>
@@ -60,7 +60,7 @@
                     <h2>Kontakta oss</h2>
                     <p><strong>X-hours AB</strong></p>
                     <p>Storgatan 10</p>
-                    <p>110 10 Storköping</p>
+                    <p>110 10 StorkÃ¶ping</p>
                     <br />
                     <p>Telefon: 010-110 10</p>
                     <p>E-post: info@xhours.se</p>
