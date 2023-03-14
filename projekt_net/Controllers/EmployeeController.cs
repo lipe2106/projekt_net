@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using projekt_net.Data;
 using projekt_net.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace projekt_net.Controllers
 {
@@ -15,10 +16,14 @@ namespace projekt_net.Controllers
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
+        private string wwwRootPath;
 
-        public EmployeeController(ApplicationDbContext context)
+        public EmployeeController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
+            wwwRootPath = _environment.WebRootPath;
         }
 
         // GET: Employee
@@ -58,10 +63,30 @@ namespace projekt_net.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,Name,ImageFile,Email")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                // Control if user uploads image
+                if(employee.ImageFile != null)
+                {
+                    // Store uploaded filname as ImageName in model
+                    employee.ImageName = employee.ImageFile.FileName;
+                    string filename = employee.ImageName;
+
+                    // Path to wwwroot/images
+                    string path = Path.Combine(wwwRootPath + "/images/", filename);
+
+                    // Store file 
+                    using(var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await employee.ImageFile.CopyToAsync(fileStream);
+                    }
+                } else
+                {
+                    employee.ImageName = null;
+                }
+
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,7 +115,7 @@ namespace projekt_net.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ImageFile,Email")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -99,8 +124,30 @@ namespace projekt_net.Controllers
 
             if (ModelState.IsValid)
             {
+                // Control if user uploads image
+                if (employee.ImageFile != null)
+                {
+                    // Store uploaded filname as ImageName in model
+                    employee.ImageName = employee.ImageFile.FileName;
+                    string filename = employee.ImageName;
+
+                    // Path to wwwroot/images
+                    string path = Path.Combine(wwwRootPath + "/images/", filename);
+
+                    // Store file 
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await employee.ImageFile.CopyToAsync(fileStream);
+                    }
+                }
+                else
+                {
+                    employee.ImageName = null;
+                }
+
                 try
                 {
+
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }

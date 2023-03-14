@@ -160,7 +160,7 @@
     <h2>Dina bokade pass</h2>
     <hr />
 <div class="table-container">
-    <table class="table table-scroll">
+    <table class="table table-scroll table-bottom">
         <thead>
             <tr>
                 <th>
@@ -197,16 +197,17 @@
                             <a asp-action="Edit" asp-route-id="@item.Id">Ledigt | Sjuk | Byte</a>
                         </td>
                         @if(@item.Abscence == 1)
-                                {
-                        <td>
-                            &#10003;
-                        </td>
-                                } else
-                                {
-                        <td></td>
-                                }
+                        {
+                            <td>
+                                &#10003;
+                            </td>
+                        } else
+                        {
+                            <td></td>
+                        }
                     </tr>
-                }
+                     
+                 }
             }
         </tbody>
     </table>

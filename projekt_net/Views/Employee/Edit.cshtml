@@ -16,9 +16,19 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" value="@User.Identity?.Name" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Spara ändringar" class="btn btn-primary" />
+                <input type="submit" value="Spara Ã¤ndringar" class="btn btn-primary" />
             </div>
         </form>
     </div>

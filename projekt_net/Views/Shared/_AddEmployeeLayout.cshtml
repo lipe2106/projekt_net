@@ -11,9 +11,9 @@
         </head>
         <body>
             <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
                     <div class="container-fluid">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">X-hours</a>
+                        <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">X-hours</a>
                     </div>
                 </nav>
             </header>
@@ -22,9 +22,17 @@
                     @RenderBody()
                 </main>
             </div>
-
-            <footer class="border-top footer text-muted">
-                <div class="container">
+            <footer class="footer footer-xhours text-light bg-dark p-3">
+                <div>
+                    <h2>Kontakta oss</h2>
+                    <p><strong>X-hours AB</strong></p>
+                    <p>Storgatan 10</p>
+                    <p>110 10 Storköping</p>
+                    <br />
+                    <p>Telefon: 010-110 10</p>
+                    <p>E-post: info@xhours.se</p>
+                </div>
+                <div class="container copy text-muted ">
                     &copy; Lina Petersson || Webbutveckling, Mittuniversitetet 2023
                 </div>
             </footer>

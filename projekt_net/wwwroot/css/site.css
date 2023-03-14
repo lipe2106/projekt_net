@@ -38,7 +38,7 @@ body {
     position: relative;
 }
 
-section {
+.xhour-section {
     background-color: rgb(140, 165, 155);
     height: 380px;
     opacity: 0.3;
@@ -321,4 +321,8 @@ section {
 
     .table-scroll {
         min-width: 700px;
+    }
+
+    .table-bottom {
+        margin-bottom: 5%;
     }

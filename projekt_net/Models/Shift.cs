@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace projekt_net.Models
 {
@@ -37,6 +38,13 @@ namespace projekt_net.Models
 
         [Display(Name = "Epost")]
         public string? Email { get; set; }
+
+        [Display(Name = "Filnamn - Bild")]
+        public string? ImageName { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Bild")]
+        public IFormFile ImageFile { get; set; }
 
         // Relationship with shifts
         public List<Shift>? Shift { get; set; }
