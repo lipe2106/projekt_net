@@ -43,7 +43,7 @@ namespace projekt_net.Models
         public string? ImageName { get; set; }
 
         [NotMapped]
-        [Display(Name = "Bild")]
+        [Display(Name = "Ladda upp bild")]
         public IFormFile ImageFile { get; set; }
 
         // Relationship with shifts

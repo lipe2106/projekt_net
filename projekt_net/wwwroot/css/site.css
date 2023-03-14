@@ -326,3 +326,8 @@ body {
     .table-bottom {
         margin-bottom: 5%;
     }
+
+    .profilimg {
+        max-width: 200px;
+        max-height: 200px;
+    }

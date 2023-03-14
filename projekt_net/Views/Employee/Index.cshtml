@@ -5,8 +5,8 @@
 
     @if (User.Identity?.Name == "admin@mail.com")
 {
-   
-    ViewData["Title"] = "Alla anst�llda";
+
+    ViewData["Title"] = "Alla anställda";
 
     <h1>@ViewData["Title"]</h1>
 
@@ -19,19 +19,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) 
+            @foreach (var item in Model)
             {
-                if(item.Id != 1) 
+                if(item.Id != 1)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name) 
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                </td>
+            </tr>
                 }
             }
         </tbody>
@@ -41,30 +41,40 @@
     ViewData["Title"] = "Din profil";
 
     <h1>@ViewData["Title"]</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-                if(item.Email == User.Identity?.Name) 
+    <hr />
+    <div>
+        <dl class="row">
+            @foreach (var item in Model)
+            {
+                if(item.Email == User.Identity.Name)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
-                        </td>
-                    </tr>
+            <dd></dd>
+            <dt class="col-sm-2">
+                Ditt namn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => item.Name)
+            </dd>
+            <dt class="col-sm-2">
+                Ditt användarnamn:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => item.Email)
+            </dd>
+            <dt class="col-sm-2">
+                Din profilbild:
+            </dt>
+            <dd></dd>
+            <dt class="col-sm-10">
+                <img src="~/images/@Html.DisplayFor(modelItem => item.ImageName)" alt="profilbild" class="profilimg" />
+            </dt>
+            <dd></dd>
+            <dt class="col-sm-2">
+                <a asp-action="Edit" asp-route-id="@item.Id">Redigera profil</a>
+            </dt>
+            <dd></dd>
                 }
             }
-        </tbody>
-    </table>
+        </dl>
+    </div>
 }

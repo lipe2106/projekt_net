@@ -124,29 +124,29 @@ namespace projekt_net.Controllers
 
             if (ModelState.IsValid)
             {
-                // Control if user uploads image
-                if (employee.ImageFile != null)
-                {
-                    // Store uploaded filname as ImageName in model
-                    employee.ImageName = employee.ImageFile.FileName;
-                    string filename = employee.ImageName;
-
-                    // Path to wwwroot/images
-                    string path = Path.Combine(wwwRootPath + "/images/", filename);
-
-                    // Store file 
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await employee.ImageFile.CopyToAsync(fileStream);
-                    }
-                }
-                else
-                {
-                    employee.ImageName = null;
-                }
 
                 try
                 {
+                    // Control if user uploads image
+                    if (employee.ImageFile != null)
+                    {
+                        // Store uploaded filname as ImageName in model
+                        employee.ImageName = employee.ImageFile.FileName;
+                        string filename = employee.ImageName;
+
+                        // Path to wwwroot/images
+                        string path = Path.Combine(wwwRootPath + "/images/", filename);
+
+                        // Store file 
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await employee.ImageFile.CopyToAsync(fileStream);
+                        }
+                    }
+                    else
+                    {
+                        employee.ImageName = null;
+                    }
 
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
