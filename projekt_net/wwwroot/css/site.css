@@ -1,5 +1,7 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,20 +10,69 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem teal;
-  background-color: white;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
     padding-bottom: 178px;
 }
 
+
+.hero {
+    width: 113.5%;
+    margin: -7%;
+}
+
+.background {
+    background-image: url("../hero.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem teal;
+  background-color: white;
+}
+
+
+.nav-link:hover {
+    color: rgb(81, 190, 172) !important;
+}
+
+.nav-link-identity {
+    background-color: white !important;
+    color: teal;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: teal;
+    background-color: teal;
+    border-color: teal;
+}
+
+.btn-primary {
+    background-color: teal;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: rgb(1, 67, 67) !important;
+}
+
+.user {
+    color: rgb(81, 190, 172) !important;
+}
+
+.user:hover {
+    color: rgb(149, 182, 182) !important;
+}
+
+a {
+    color: teal;
+}
+
+a:hover {
+    color: rgb(1, 67, 67);
+}
 
 .link {
     text-decoration: underline;
@@ -31,8 +82,6 @@ body {
 .link:hover {
     color: gray;
 }
-
-
 
 .section-container {
     position: relative;
@@ -79,6 +128,38 @@ body {
         left: 7%;
         width: 70%;
         height: auto;
+    }
+}
+
+.x-hour-container {
+    padding-top: 5%;
+    max-width: 1450px;
+    margin: auto;
+}
+
+
+.xhours h1, .xhours h2 {
+    font-size: 1rem;
+}
+
+.xhour-h1 {
+    width: 60%;
+    padding: 6% 2%;
+}
+
+@media (max-width: 950px) {
+
+    .xhour-h1 {
+        width: 80%;
+        padding-left: 20%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .xhour-h1 {
+        width: 100%;
+        padding-left: 0%;
     }
 }
 
@@ -161,173 +242,89 @@ body {
     font-weight: lighter;
 }
 
+.info-section {
+    max-height: 480px;
+    padding-bottom: 3%;
+    padding-top: 2%;
+}
 
-.x-hour-container {
-    padding-top: 5%;
-    max-width: 1450px;
+.info-section form {
+    width: 40%;
+    font-size: 0.5em;
     margin: auto;
-}
-
-
-.xhours h1, .xhours h2 {
-    font-size: 1rem;
-}
-
-.xhour-h1 {
-    width: 60%;
-    padding: 6% 2%;
-}
-
-@media (max-width: 950px) {
-
-    .xhour-h1 {
-        width: 80%;
-        padding-left: 20%;
-    }
+    margin-top: 2%;
+    border: 1px solid gray;
 }
 
 @media (max-width: 500px) {
-
-    .xhour-h1 {
-        width: 100%;
-        padding-left: 0%;
-    }
+    .info-section form {
+        width: 80%;
+    } 
 }
 
-    .hero {
-        width: 113.5%;
-        margin: -7%;
-    }
-
-    .background {
-        background-image: url("../hero.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    }
-
-    .info-section {
-        max-height: 480px;
-        padding-bottom: 3%;
-        padding-top: 2%;
-    }
-
-        .info-section form {
-            width: 40%;
-            font-size: 0.5em;
-            margin: auto;
-            margin-top: 2%;
-            border: 1px solid gray;
-        }
-
-        @media (max-width: 500px) {
-            .info-section form {
-                width: 80%;
-            } 
-        }
-
-        .info-section p {
-            font-size: 0.8em;
-            margin-left: 30%;
-        }
+.info-section p {
+    font-size: 0.8em;
+    margin-left: 30%;
+}
 
 
-        .info-section h4 {
-            font-size: 1rem;
-        }
+.info-section h4 {
+    font-size: 1rem;
+}
 
 
-        .info-section select, .info-section input {
-            font-size: 1em;
-        }
+.info-section select, .info-section input {
+    font-size: 1em;
+}
 
-        .info-section .btn {
-            font-size: 1em;
-            background-color: teal;
-        }
+.info-section .btn {
+    font-size: 1em;
+    background-color: teal;
+}
 
-    footer {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 180px;
-    }
+.table-container {
+    overflow-x: auto;
+}
 
-        footer h2 {
-            font-size: 1.2em;
-            font-weight: lighter;
-        }
+.table-scroll {
+    min-width: 700px;
+}
 
-        footer p {
-            margin: 0;
-            font-size: 0.8em;
-        }
+.table-bottom {
+    margin-bottom: 5%;
+}
 
-    .copy {
-        text-align: right;
-        padding-right: 0;
-        position: absolute;
-        bottom: 12px;
-        right: 20px;
-        font-size: 0.8em;
-    }
+.profilimg {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 180px;
+}
+
+footer h2 {
+    font-size: 1.2em;
+    font-weight: lighter;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.copy {
+    text-align: right;
+    padding-right: 0;
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    font-size: 0.8em;
+}
 
 
 
-    .nav-link:hover {
-        color: rgb(81, 190, 172) !important;
-    }
-
-    .nav-link-identity {
-        background-color: white !important;
-        color: teal;
-    }
-
-    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-        color: teal;
-        background-color: teal;
-        border-color: teal;
-    }
-
-    .btn-primary {
-        background-color: teal;
-        border: none;
-    }
-
-        .btn-primary:hover {
-            background-color: rgb(1, 67, 67) !important;
-        }
-
-    .user {
-        color: rgb(81, 190, 172) !important;
-    }
-
-        .user:hover {
-            color: rgb(149, 182, 182) !important;
-        }
-
-    a {
-        color: teal;
-    }
-
-        a:hover {
-            color: rgb(1, 67, 67);
-        }
-
-    .table-container {
-        overflow-x: auto;
-    }
-
-    .table-scroll {
-        min-width: 700px;
-    }
-
-    .table-bottom {
-        margin-bottom: 5%;
-    }
-
-    .profilimg {
-        max-width: 200px;
-        max-height: 200px;
-    }

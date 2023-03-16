@@ -8,58 +8,56 @@
     <h1 class="display-4 text-light">Ditt företags administrationssystem för timanställda </h1>
 </div>
 <div class="section-container">
-<section class=" p-1 mt-5 xhour-section">
-</section>
-<div class="border p-4 m-5 shadow xhours">
-    <h1>Vy över arbetspass [Admin]</h1>
-    <hr />
-    <h2>Lediga pass</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.From)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.To)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    <section class=" p-1 mt-5 xhour-section"></section>
+    <div class="border p-4 m-5 shadow xhours">
+        <h1>Vy över arbetspass [Admin]</h1>
+        <hr />
+        <h2>Lediga pass</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.From)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.To)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
             @foreach (var item in Model)
-    {
-        if(item.EmployeeId == 1)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To)
-                </td>
-                <td class="link">Redigera | Information | Radera</td>
-            </tr>
-        }
-    }
-        </tbody>
-    </table>
-</div>
-<div class="text-light info-right bg-dark">
-    <h2>Adminpanel med vy över lediga arbetspass</h2>
-    <p>Som admin över ditt företags X-hours får du tillgång till vyn över arbetspassen där du på ett lättöverskådligt sätt kan se vilka arbetspass som är lediga. 
-    Du kan från vyn redigera dessa pass, se detaljerad information om dem samt radera arbetspassen om de av någon anledning inte skulle vara aktuella längre. </p>
-</div>
+            {
+                if(item.EmployeeId == 1)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td class="link">Redigera | Information | Radera</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="text-light info-right bg-dark">
+        <h2>Adminpanel med vy över lediga arbetspass</h2>
+        <p>Som admin över ditt företags X-hours får du tillgång till vyn över arbetspassen där du på ett lättöverskådligt sätt kan se vilka arbetspass som är lediga. 
+        Du kan från vyn redigera dessa pass, se detaljerad information om dem samt radera arbetspassen om de av någon anledning inte skulle vara aktuella längre. </p>
+    </div>
 </div>
 <div class="section-container">
-    <section class=" p-1 mt-5 xhour-section">
-    </section>
+    <section class=" p-1 mt-5 xhour-section"></section>
     <div class="border p-4 mb-5 shadow xhours right">
         <h2>Bokade pass [Admin]</h2>
         <table class="table">
@@ -83,35 +81,35 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-    {
-        if(item.EmployeeId != 1)
-        {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.From)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.To)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.Name)
-                    </td>
-                    @if(@item.Abscence == 1)
+            @foreach (var item in Model)
+            {
+                if(item.EmployeeId != 1)
                 {
-                    <td>
-                        &#10003;
-                    </td>
-                } else
-                {
-                    <td></td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee.Name)
+                        </td>
+                        @if(@item.Abscence == 1)
+                        {
+                            <td>
+                                &#10003;
+                            </td>
+                        } else
+                        {
+                            <td></td>
+                        }
+                    </tr>
                 }
-                </tr>
-        }
-    }
+            }
             </tbody>
         </table>
     </div>
@@ -124,42 +122,40 @@
 <div class="bg-dark info-section text-light">
     <h2 class="display-5 text-center">Lägg på ett smidigt sätt in arbetspass</h2>
     <h3 class="fw-lighter text-center">Vare sig de är lediga eller ska tilldelas en timanställd</h3>
-            <form asp-action="Create" class="bg-light p-3 create text-dark">
-                <h4>Lägg till arbetspass</h4>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label class="control-label">Typ av pass</label>
-                    <input class="form-control" autocomplete="off" value="Kväll" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Från</label>
-                    <input type="datetime" class="form-control" value="2023-03-20 16.00" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Till</label>
-                    <input type="datetime" class="form-control" value="2023-03-20 22.00"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Arbetar passet</label>
-                    <select class="form-control" asp-items="ViewBag.EmployeeId">
-                    </select>
-                </div>
-                <br />
-                <div class="form-group">
-                    <input type="submit" value="Lägg till" class="btn btn-primary" disabled="disabled" />
-                </div>
-            </form>
+        <form asp-action="Create" class="bg-light p-3 create text-dark">
+            <h4>Lägg till arbetspass</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Typ av pass</label>
+                <input class="form-control" autocomplete="off" value="Kväll" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Från</label>
+                <input type="datetime-local" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Till</label>
+                <input type="datetime-local" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Arbetar passet</label>
+                <select class="form-control" asp-items="ViewBag.EmployeeId">
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Lägg till" class="btn btn-primary" disabled="disabled" />
+            </div>
+        </form>
     <p class="fw-lighter">* Knappen är i detta formulär satt ur funktion</p>
 </div>
 <div class="section-container">
-    <section class=" p-1 mt-5 xhour-section">
-    </section>
+    <section class=" p-1 mt-5 xhour-section"></section>
     <div class="border p-4 mb-5 shadow xhours left">
         <h1>Vy över arbetspass [Anställd]</h1>
         <hr />
         <h2>Lediga pass</h2>
-
         <table class="table">
             <thead>
                 <tr>
@@ -176,26 +172,26 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-    {
-        if(item.EmployeeId == 1)
-        {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.From)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.To)
-                    </td>
-                    <td class="link">
-                        Boka arbetspass
-                    </td>
-                </tr>
-        }
-    }
+            @foreach (var item in Model)
+            {
+                if(item.EmployeeId == 1)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td class="link">
+                            Boka arbetspass
+                        </td>
+                    </tr>
+                }
+            }
             </tbody>
         </table>
     </div>
@@ -206,8 +202,7 @@
     </div>
 </div>
 <div class="section-container">
-    <section class=" p-1 mt-5 xhour-section">
-    </section>
+    <section class=" p-1 mt-5 xhour-section"></section>
     <div class="border p-4 mb-5 shadow xhours right">
         <h2>Dina bokade pass [Anställd]</h2>
         <hr />
@@ -230,35 +225,35 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-    {
-        if(@item.Employee.Email == "lina@mail.com")
-        {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.From)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.To)
-                    </td>
-                    <td class="link">
-                        Ledigt | Sjuk | Byte
-                    </td>
-                    @if(@item.Abscence == 1)
+            @foreach (var item in Model)
+            {
+                if(@item.Employee.Email == "lina@mail.com")
                 {
-                    <td>
-                        &#10003;
-                    </td>
-                } else
-                {
-                    <td></td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.From)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.To)
+                        </td>
+                        <td class="link">
+                            Ledigt | Sjuk | Byte
+                        </td>
+                        @if(@item.Abscence == 1)
+                        {
+                            <td>
+                                &#10003;
+                            </td>
+                        } else
+                        {
+                            <td></td>
+                        }
+                    </tr>
                 }
-                </tr>
-        }
-    }
+            }
             </tbody>
         </table>
     </div>

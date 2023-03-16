@@ -24,14 +24,14 @@
             </div>
             <div class="form-group" style="display:none;">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" value="@User.Identity?.Name" />
+                <input asp-for="Email" class="form-control" value="@User.Identity?.Name" /> <!-- save logged in email as employee email in table -->
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <br />
+            <p>* Obs!<br />Vid redigering av din profil måste du också ladda upp ny profilbild</p>
             <div class="form-group">
                 <input type="submit" value="Spara ändringar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-

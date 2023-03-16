@@ -29,11 +29,12 @@ namespace projekt_net
         }
 
         // GET: /xhours
+        // Public
         [Route("/xhours")]
         public async Task<IActionResult> xhours()
         {
             var applicationDbContext = _context.Shift.Include(s => s.Employee);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Name");
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Name"); // Show name as text in selectbox
             return View(await applicationDbContext.ToListAsync());
 
         }
@@ -67,8 +68,6 @@ namespace projekt_net
         }
 
         // POST: Shift/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -99,14 +98,12 @@ namespace projekt_net
                 return NotFound();
             }
 
-            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
-            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId);
+            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId); // Show Email as text in selectbox
+            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId); // Show Name as text in selectbox
             return View(shift);
         }
 
         // POST: Shift/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -137,8 +134,8 @@ namespace projekt_net
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId);
-            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId);
+            ViewData["EmployeeEmail"] = new SelectList(_context.Employees, "Id", "Email", shift.EmployeeId); // Show email as text in selectbox
+            ViewData["EmployeeName"] = new SelectList(_context.Employees, "Id", "Name", shift.EmployeeId); // Show name as text in selectbox
 
             return View(shift);
         }

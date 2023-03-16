@@ -4,6 +4,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<!-- Show if admin is logged in -->
 @if (User.Identity?.Name == "admin@mail.com")
 {
     ViewData["Title"] = "Redigera arbetspass";
@@ -42,6 +43,7 @@
             </form>
         </div>
     </div>
+<!-- Show if employee is logged in -->
 } else if (SignInManager.IsSignedIn(User))
 {
     ViewData["Title"] = "Hantera arbetspass";
@@ -91,11 +93,11 @@
         </div>
     </div>
 }
-    <br />
-    <div>
-        <a asp-action="Index">Tillbaka till vyn</a>
-    </div>
+<br />
+<div>
+    <a asp-action="Index">Tillbaka till vyn</a>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
